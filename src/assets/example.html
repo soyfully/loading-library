@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Etribe Loader Example</title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+
+        var loader;
+
+        function showLoader () {
+            if (loader) {
+                loader.hide();
+            }
+
+            loader = new circleLoader({
+                'renderAt': document.querySelector('.showLoad'),
+                'dim': JSON.parse($(".dim").val()),
+                'preventScroll': JSON.parse($('.preventScroll').val()),
+                'scale': $('.scale').val(),
+                'color': $('.color').val(),
+                'dimCssText': $('.dimCssText').val(),
+                'loadingText': $('.loadingText').val(),
+            });
+
+            loader.show();
+        }
+
+        function hideLoader () {
+            if (loader) {
+                loader.hide();
+                loader = null;
+            }
+        }
+
+        function showSpinnerAtButton () {
+            if ($('.btnSpinnerArea:visible').length) {
+                hideLoader();
+                $('.btnSpinnerArea').hide();
+                return;
+            }
+            $('.btnSpinnerArea').css('display', 'inline-block');
+
+            /*etribeLoader.instance().show({
+                'renderAt': document.querySelector('.btnSpinnerArea'),
+                'scale': .6,
+                'type': 'loader-type-4'
+            });*/
+            loader = new circleLoader({
+                'renderAt': document.querySelector('.btnSpinnerArea'),
+                'scale': .4,
+            });
+            loader.show();
+        }
+        
+    </script>
+</head>
+<body>
+    <h1>Etribe Loader Example</h1>
+    <div>
+        <ul style="list-style:none">
+            <h2>html</h2>
+            <li>
+                &lt;div class='showLoad'&gt;&lt;/div&gt;
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul style="list-style:none">
+            <h2>script</h2>
+            <li>var loader = new circleLoader({</li>
+            <li style="margin-left:20px">'renderAt': document.querySelector('.showLoad')</li>
+            <li style="margin-left:20px">'dim:
+                <select name="dim" class="dim">
+                    <option value="false">false</option>
+                    <option value="true">true</option>
+                </select>
+            </li>
+            <li style="margin-left:20px">'preventScroll:
+                <select name="preventScroll" class="preventScroll">
+                    <option value="false">false</option>
+                    <option value="true">true</option>
+                </select>
+            </li>
+            <li style="margin-left:20px">'scale':
+                <input type="text" name="scale" size="5" class="scale">
+            </li>
+            <li style="margin-left:20px">'color':
+                <input type="text" name="color" size="15" class="color">
+            </li>
+            <li style="margin-left:20px">'dimCssText':
+                <input type="text" name="dimCssText" size="20" class="dimCssText">
+            </li>
+            <li style="margin-left:20px">'loadingText':
+                <input type="text" name="loadingText" size="20" class="loadingText">
+            </li>
+            <li>});</li>
+            <li style="margin-top:20px">loader.show();</li>
+            <div style="margin-top:20px">
+                <button onclick="showLoader()">SHOW</button>
+            </div>
+
+            <div style="margin-top:20px">loader.hide();</div>
+
+            <div style="margin-top:20px">
+                <button onclick="hideLoader()">HIDE</button>
+            </div>
+        </ul>
+
+        <div>
+            <h2>Button Spinner Test</h2>
+            <div>
+                <button style="height:40px;font-size:15px;" onclick="showSpinnerAtButton();">
+                    <span class="btnSpinnerArea" style="display:none;height:100%;"></span>
+                    HAHAHA
+                </button>
+            </div>
+        </div>
+
+        <div class="showLoad" style="height:300px; margin-top:40px;"></div>
+    </div>
+</body>
+</html>
